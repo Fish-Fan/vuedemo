@@ -128,3 +128,48 @@ var app9 = new Vue({
         }
     }
 });
+
+var app10 = new Vue({
+    el: "#app10",
+    data: {
+        name: "Vue.js"
+    },
+    methods: {
+        greet: function (event) {
+            alert("Hello," + this.name);
+            alert(event.target.tagName);
+        },
+        say : function (msg) {
+            alert(msg);
+        },
+        said: function (msg, event) {
+            //阻止默认事件的响应
+            event.preventDefault();
+
+        },
+        submit: function () {
+            alert("文本已提交");
+        }
+    }
+});
+
+var app11 = new Vue({
+    el: "#app11",
+    data: {
+        message: "",
+        checked: false,
+        checkedNames: [],
+        picked: "",
+        select: "",
+        select1: "A",
+        options: [
+            {text: "one",value: "A"},
+            {text: "two",value: "B"},
+            {text: "three",value: "C"}
+        ],
+        toggle: "Bvalue",
+        a: "Avalue",
+        b: "Bvalue",
+        lazy: ""
+    }
+});
