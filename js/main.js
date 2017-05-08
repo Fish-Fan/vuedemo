@@ -239,3 +239,8 @@ Vue.transition('bounce',{
     leaveClass: 'bounceOutRight'
 });
 
+// Vue.transition('fadeIn',{
+//     enterClass: 'fadeInLeft',
+//     leaveClass: 'fadeInRight'
+// });
+

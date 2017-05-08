@@ -54,3 +54,12 @@
     opacity: 0;
     height: 0;
 }
+
+.fadeIn-transition {
+    transition: all .3s;
+    opacity: 1;
+}
+
+.fadeIn-enter,.fadeIn-leave {
+    opacity: 0;
+}
