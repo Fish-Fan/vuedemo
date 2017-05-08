@@ -5,8 +5,9 @@
     <title>Title</title>
     <script src="http://cdn.bootcss.com/vue/1.0.25-csp/vue.js"></script>
     <!--<script src="js/vue.js"></script>-->
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-
+    <link rel="stylesheet" href="css/animate.css">
 </head>
 <body>
     <div class="container">
@@ -147,6 +148,30 @@
                 <span>{{lazy}}</span>
                 <input type="text" v-model="lazy" lazy>
             </p>
+        </div>
+
+        <!--css过渡-->
+        <div id="app12">
+            <div v-if="show" transition="expand">hello</div>
+            <button @click="toggle">toggle</button>
+            <!--钩子函数-->
+            <div v-if="show1" :transition="transitionName">hello</div>
+            <button @click="toggle1">toggle1</button>
+            <!--自定义过渡类名-->
+            <div v-if="ok" class="animated" transition="bounce">watch me bounce</div>
+            <button @click="toggle2">toggle2</button>
+            <br>
+            <!--css动画-->
+            <p v-show="show2" transition="bounce">Look at me!!!</p>
+            <button @click="toggle3">toggle3</button>
+            <br>
+            <!--渐进过渡-->
+            <div id="app12Demo">
+                <input type="text" v-model="name">
+                <ul>
+                    <li v-for="name in names | filterBy name" transition="staggered" stagger="100">{{name.msg}}</li>
+                </ul>
+            </div>
         </div>
 
 

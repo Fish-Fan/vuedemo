@@ -173,3 +173,69 @@ var app11 = new Vue({
         lazy: ""
     }
 });
+
+var app12 = new Vue({
+    el: "#app12",
+    data: {
+        show: true,
+        show1: true,
+        transitionName: 'expand',
+        ok: false,
+        show2: true,
+        names: [
+            { msg: 'Bruce Lee' },
+            { msg: 'Jackie Chan' },
+            { msg: 'Chuck Norris' },
+            { msg: 'Jet Li' },
+            { msg: 'Kung Fury' }
+        ],
+        name: ""
+    },
+    methods: {
+        toggle: function () {
+            this.show = !this.show;
+        },
+        toggle1: function () {
+            this.show1 = !this.show1;
+        },
+        toggle2: function () {
+            this.ok = !this.ok;
+        },
+        toggle3: function () {
+            this.show2 = !this.show2;
+        }
+    }
+});
+//vue transition钩子函数
+Vue.transition('expand',{
+    beforeEnter: function (el) {
+        el.textContent = 'beforeEnter';
+    },
+    enter: function (el) {
+        el.textContent = 'enter';
+    },
+    afterEnter: function (el) {
+        el.textContent = 'afterEnter';
+    },
+    enterCancelled: function (el) {
+        //handle something
+    },
+    beforeLeave: function (el) {
+        el.textContent = 'beforeLeave';
+    },
+    leave: function (el) {
+        el.textContent = 'leave';
+    },
+    afterLeave: function (el) {
+        el.textContent = 'afterLeave';
+    },
+    leaveCancelled: function (el) {
+        //handle something
+    }
+});
+
+Vue.transition('bounce',{
+    enterClass: 'bounceInLeft',
+    leaveClass: 'bounceOutRight'
+});
+
