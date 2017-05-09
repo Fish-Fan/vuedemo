@@ -239,8 +239,56 @@ Vue.transition('bounce',{
     leaveClass: 'bounceOutRight'
 });
 
-// Vue.transition('fadeIn',{
-//     enterClass: 'fadeInLeft',
-//     leaveClass: 'fadeInRight'
+// var myComponent = Vue.extend({
+//     template: '<div>This is a template</div>',
 // });
+//
+// var child = Vue.extend({
+//     template: '<p>This is child template</p>'
+// });
+//
+// //全局注册组件
+// Vue.component('my-component',myComponent);
+//
+// var app13 = new Vue({
+//     el: "#app13",
+//     //局部注册组件
+//     components: {
+//         'child-component': child
+//     }
+// });
+
+//注册语法糖
+Vue.component('my-component',{
+    template: '<div>This is a template</div>'
+});
+
+var app13 = new Vue({
+    el: "#app13",
+    //局部注册组件
+    components: {
+        'child-component': {
+            template: '<p>This is child template</p>'
+        }
+    }
+});
+
+var childComp = Vue.extend({
+    template: '<p>This is child-component!!!</p>'
+});
+
+var parentComp = Vue.extend({
+    template: '<div>I\' a parent div!!!<child-comp></child-comp></child-comp></div>',
+    components: {
+        'child-comp': childComp
+    }
+});
+
+var app14 = new Vue({
+    el: "#app14",
+    components: {
+        'parent-comp': parentComp
+    }
+});
+
 
