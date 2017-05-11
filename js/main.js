@@ -286,8 +286,65 @@ var parentComp = Vue.extend({
 
 var app14 = new Vue({
     el: "#app14",
+    data: {
+        name: 'Jack',
+        age: '29'
+    },
     components: {
-        'parent-comp': parentComp
+        'parent-comp': parentComp,
+        'my-component1': {
+            template: '#myComponent1'
+        },
+        'my-component2': {
+            template: '#myComponent2'
+        },
+        'my-component3': {
+            template: '#myComponent3',
+            props: ['myName','myAge']
+        }
+    }
+
+});
+
+var app15 = new Vue({
+    el: '#app15',
+    data: {
+        name: 'Tom',
+        age: 18
+    },
+    components: {
+        'my-component4': {
+            template: '#myComponent4',
+            props: ['myName','myAge']
+        }
+    }
+});
+
+var app16 = new Vue({
+    el: '#app16',
+    data: {
+        name: 'Tom',
+        age: 18
+    },
+    components: {
+        'my-component5': {
+            template: '#myComponent5',
+            props: ['myName','myAge']
+        }
+    }
+});
+
+var app17 = new Vue({
+    el: '#app17',
+    data: {
+        name: 'Tom',
+        age: 20
+    },
+    components: {
+        'my-component6': {
+            template: '#myComponent6',
+            props: ['myName','myAge']
+        }
     }
 });
 
