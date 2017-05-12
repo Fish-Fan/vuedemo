@@ -348,4 +348,93 @@ var app17 = new Vue({
     }
 });
 
+Vue.component('simple-grid',{
+    template: '#grid',
+    props: {
+        data: Array,
+        columns: Array,
+        filterKey: String
+    }
+});
+
+var app18 = new Vue({
+    el: '#app18',
+    data: {
+        searchQuery: '',
+        gridColumns: ['name','age','sex'],
+        gridData: [{
+            name: 'Jack',
+            age: '20',
+            sex: '男'
+        },{
+            name: 'Tom',
+            age: '19',
+            sex: '男'
+        },{
+            name: 'Jenny',
+            age: '21',
+            sex: '女'
+        }]
+
+    }
+
+});
+
+Vue.component('child',{
+    template: '#child-template',
+    data: function () {
+        return {msg: 'hello'}
+    },
+    methods: {
+        notify: function () {
+            if(this.msg.trim()) {
+                this.$dispatch('child-msg',this.msg);
+                this.msg = '';
+            }
+        }
+    }
+});
+
+var app19 = new Vue({
+    el: '#events-example',
+    data: {
+        messages: []
+    },
+    events: {
+        'child-msg': function (msg) {
+            this.messages.push(msg);
+        }
+    }
+});
+
+var app20 = new Vue({
+    el: '#app20',
+    components: {
+        'my-component7': {
+            template: '#myComponent7'
+        },
+        'my-component8': {
+            template: '#myComponent8'
+        }
+    }
+});
+
+var app21 = new Vue({
+    el: '#app21',
+    data: {
+        currentView: 'active-template2'
+    },
+    components: {
+        'active-template1': {
+            template: '#activeTemplate1'
+        },
+        'active-template2': {
+            template: '#activeTemplate2'
+        },
+        'active-template3': {
+            template: '#activeTemplate3'
+        }
+    }
+
+});
 

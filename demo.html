@@ -370,7 +370,108 @@
                 <my-component6 :my-name.once="name" :my-age.once="age"></my-component6>
             </div>
 
+            <div id="app18">
+                <h3>数据绑定Demo</h3>
+                <div class="searchbar">
+                    search: <input type="text" class="form-control" v-model="searchQuery">
+                </div>
+                <simple-grid :data="gridData" :columns="gridColumns" :filter-key="searchQuery"></simple-grid>
 
+                <template id="grid">
+                    <table class="table">
+                        <thead style="background-color: #40B681">
+                            <tr>
+                                <th v-for="col in columns">
+                                    {{col | capitalize}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="entry in data | filterBy filterKey">
+                                <td v-for="col in columns">
+                                    {{entry[col]}}
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </template>
+            </div>
+
+            <div id="app19">
+                <h3>自定义事件</h3>
+                <!--子组件模板-->
+                <template id="child-template">
+                    <input type="text" v-model="msg">
+                    <button @click="notify">dispatch event</button>
+                </template>
+                <!--父组件模板-->
+                <div id="events-example">
+                    <p>messages: {{messages | json}}</p>
+                    <child></child>
+                </div>
+            </div>
+
+            <div id="app20">
+                <h3>使用slot进行内容分发</h3>
+                <template id="myComponent7">
+                    <div>
+                        <p>This is my component</p>
+                        <slot>
+                            如果没有内容分发则显示我
+                        </slot>
+
+                    </div>
+                </template>
+                <my-component7>
+                    <p>This is some origin text!</p>
+                    <p>This is some more origin text!</p>
+                </my-component7>
+
+                <!--具名slot-->
+                <h3>具名slot</h3>
+                <template id="myComponent8">
+                    <div>
+                        <slot name="one"></slot>
+                        <slot> 如果没有内容分发则显示我 </slot>
+                        <slot name="two"></slot>
+                    </div>
+                </template>
+                <my-component8>
+                    <p slot="one">One</p>
+                    <p slot="two">Two</p>
+                    <p>Default A</p>
+                </my-component8>
+            </div>
+
+            <div id="app21">
+                <h3>动态组件</h3>
+                <template id="activeTemplate1">
+                    <p>This is active template1</p>
+                </template>
+
+                <template id="activeTemplate2">
+                    <p>This is active template2</p>
+                </template>
+
+                <template id="activeTemplate3">
+                    <p>This is active template3</p>
+                </template>
+                <label>active-template1</label>
+                <input type="radio" value="active-template1" v-model="currentView">
+                <label>active-template2</label>
+                <input type="radio" value="active-template2" v-model="currentView">
+                <label>active-template3</label>
+                <input type="radio" value="active-template3" v-model="currentView">
+
+                <div id="active-container" :is="currentView" keep-alive transition="expand">
+                    <active-template1></active-template1>
+                    <active-template2></active-template2>
+                    <active-template3></active-template3>
+                </div>
+
+
+            </div>
 
 
         </fieldset>
