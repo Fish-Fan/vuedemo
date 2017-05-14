@@ -438,3 +438,20 @@ var app21 = new Vue({
 
 });
 
+var app22 = new Vue({
+    el: "#app22",
+    data: {
+        message: 'hello'
+    },
+    computed: {
+        reverseMessage: function () {
+            return this.message.split('').reverse().join('');
+        }
+    },
+    methods: {
+        reverseMessageMethod: function () {
+            return this.message.split('').reverse().join('');
+        }
+    }
+});
+

@@ -457,12 +457,13 @@
                 <template id="activeTemplate3">
                     <p>This is active template3</p>
                 </template>
-                <label>active-template1</label>
                 <input type="radio" value="active-template1" v-model="currentView">
-                <label>active-template2</label>
+                <label>active-template1</label>
                 <input type="radio" value="active-template2" v-model="currentView">
-                <label>active-template3</label>
+                <label>active-template2</label>
                 <input type="radio" value="active-template3" v-model="currentView">
+                <label>active-template3</label>
+
 
                 <div id="active-container" :is="currentView" keep-alive transition="expand">
                     <active-template1></active-template1>
@@ -475,6 +476,17 @@
 
 
         </fieldset>
+
+        <filedset>
+            <!--计算属性是有缓存的-->
+            <legend>计算属性</legend>
+            <div id="app22">
+                <p>original message: "{{message}}"</p>
+                <p>computed reverse message: "{{reverseMessage}}"</p>
+                <!--使用method可以达到同样的效果，但是并没有缓存-->
+                <p>method in reverse message: "{{reverseMessageMethod()}}"</p>
+            </div>
+        </filedset>
 
 
 
