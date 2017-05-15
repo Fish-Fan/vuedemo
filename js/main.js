@@ -320,6 +320,8 @@ var app15 = new Vue({
     }
 });
 
+
+
 var app16 = new Vue({
     el: '#app16',
     data: {
@@ -454,4 +456,32 @@ var app22 = new Vue({
         }
     }
 });
+
+var preData = {
+
+}
+
+var app23 = new Vue({
+    el: "#app23",
+    data: {
+        name: '张三',
+        age: 18,
+        info: {
+            message: 'hello'
+        }
+    },
+    ready: function () {
+        // Vue.set(preData,'sex','男');
+        // Vue.set(preData.info,'msg','haha');
+        this.$set('sex','男');
+        this.$set('info.msg','haha');
+    }
+
+});
+
+
+
+
+
+
 
