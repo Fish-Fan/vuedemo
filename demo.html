@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="http://cdn.bootcss.com/vue/1.0.25-csp/vue.js"></script>
+
     <!--<script src="js/vue.js"></script>-->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -499,15 +499,35 @@
             </ul>
         </div>
 
+        <filedset>
+            <legend>vue-validate</legend>
+            <div id="app24">
+                <validator name="validation1">
+                    <form novalidate>
+                        <div class="username-field">
+                            <label for="username">username:</label>
+                            <input id="username" type="text" v-validate:username="['required']">
+                        </div>
+                        <div class="comment-field">
+                            <label for="comment">comment:</label>
+                            <input id="comment" type="text" v-validate:comment="{ maxlength: 256 }">
+                        </div>
+                        <div class="errors">
+                            <p v-if="$validation1.username.required">Required your name.</p>
+                            <p v-if="$validation1.comment.maxlength">Your comment is too long.</p>
+                        </div>
+                        <input type="submit" value="send" v-if="$validation1.valid">
+                    </form>
+                </validator>
 
-
+            </div>
+        </filedset>
 
     </div>
-
-
-    
-
+    <script src="http://cdn.bootcss.com/vue/1.0.25-csp/vue.js"></script>
+    <script src="js/vue-validator.js"></script>
     <script src="js/main.js"></script>
+
 
 </body>
 </html>

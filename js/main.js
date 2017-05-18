@@ -479,6 +479,15 @@ var app23 = new Vue({
 
 });
 
+var app24 = new Vue({
+    el: "#app24",
+    data: {
+
+    }
+});
+
+
+
 
 
 

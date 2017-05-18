@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<!--<div id="app">-->
+    <!--<validator name="validation">-->
+        <!--<form novalidate>-->
+            <!--<div class="username-field">-->
+                <!--<label for="username">username:</label>-->
+                <!--<input type="text" id="username" v-validate:username="['required']" />-->
+            <!--</div>-->
+            <!--<div class="comment-filed">-->
+                <!--<label for="comment">comment:</label>-->
+                <!--<input type="text" id="comment" v-validate:comment="{maxlength: 256}" />-->
+            <!--</div>-->
+            <!--<div class="errors">-->
+                <!--<p v-if="$validation.username.required">请输入你的名字</p>-->
+                <!--<p v-if="$validation.comment.maxlength">您的评论太长了</p>-->
+            <!--</div>-->
+            <!--<input type="submit" value="send" v-if="$validation.valid" />-->
+        <!--</form>-->
+    <!--</validator>-->
+<!--</div>-->
+
+<div id="app" class="container">
+    <validator name="validation1">
+        <form novalidate>
+            <div class="username-field input-group">
+                <label for="username">username:</label>
+                <input id="username" type="text" v-validate:username="['required']" class="form-control">
+            </div>
+            <div class="comment-field input-group">
+                <label for="comment">comment:</label>
+                <input id="comment" type="text" v-validate:comment="{ maxlength: 10 }" class="form-control">
+            </div>
+
+            <div class="errors">
+                <p class="text-danger" v-if="$validation1.username.required">Required your name.</p>
+                <p class="text-danger" v-if="$validation1.comment.maxlength">Your comment is too long.</p>
+            </div>
+            <button class="btn btn-primary" type="submit" value="send" v-if="$validation1.valid">提交</button>
+        </form>
+    </validator>
+
+
+</div>
+<script src="//cdn.bootcss.com/vue/1.0.24/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js"></script>
+
+<script type="text/javascript">
+
+    new Vue({
+        el: '#app'
+    });
+
+</script>
+
+
+</body>
+</html>
