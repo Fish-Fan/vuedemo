@@ -6,43 +6,29 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-<!--<div id="app">-->
-    <!--<validator name="validation">-->
-        <!--<form novalidate>-->
-            <!--<div class="username-field">-->
-                <!--<label for="username">username:</label>-->
-                <!--<input type="text" id="username" v-validate:username="['required']" />-->
-            <!--</div>-->
-            <!--<div class="comment-filed">-->
-                <!--<label for="comment">comment:</label>-->
-                <!--<input type="text" id="comment" v-validate:comment="{maxlength: 256}" />-->
-            <!--</div>-->
-            <!--<div class="errors">-->
-                <!--<p v-if="$validation.username.required">请输入你的名字</p>-->
-                <!--<p v-if="$validation.comment.maxlength">您的评论太长了</p>-->
-            <!--</div>-->
-            <!--<input type="submit" value="send" v-if="$validation.valid" />-->
-        <!--</form>-->
-    <!--</validator>-->
-<!--</div>-->
-
 <div id="app" class="container">
     <validator name="validation1">
         <form novalidate>
             <div class="username-field input-group">
-                <label for="username">username:</label>
+                <label for="username">必填项:</label>
                 <input id="username" type="text" v-validate:username="['required']" class="form-control">
+                <p class="text-danger" v-if="$validation1.username.required">Required your name.</p>
             </div>
             <div class="comment-field input-group">
-                <label for="comment">comment:</label>
-                <input id="comment" type="text" v-validate:comment="{ maxlength: 10 }" class="form-control">
+                <label for="comment">长度约束:</label>
+                <input id="comment" type="text" v-validate:comment="{required: true ,minlength: 3,maxlength: 10 }" class="form-control">
+                <p class="text-danger" v-if="$validation1.comment.maxlength">Your comment is too long.</p>
+                <p class="text-info" v-if="$validation1.comment.minlength">长度不能小于三个字符</p>
             </div>
 
-            <div class="errors">
-                <p class="text-danger" v-if="$validation1.username.required">Required your name.</p>
-                <p class="text-danger" v-if="$validation1.comment.maxlength">Your comment is too long.</p>
+            <div>
+                <label for="object1">rule字面量对象约束:</label>
+                <input id="object1" type="text" v-validate:object1="rules">
+                <p class="text-danger" v-if="$validation1.object1.maxlength">Your comment is too long.</p>
+                <p class="text-danger" v-if="$validation1.object1.minlength">长度不能小于三个字符</p>
             </div>
-            <button class="btn btn-primary" type="submit" value="send" v-if="$validation1.valid">提交</button>
+
+            <button class="btn btn-primary" type="submit" value="send" @click="isPass($validation1.valid,$event)">提交</button>
         </form>
     </validator>
 
@@ -54,7 +40,22 @@
 <script type="text/javascript">
 
     new Vue({
-        el: '#app'
+        el: '#app',
+        data: {
+            rules: {
+                required: true,
+                minlength: 3,
+                maxlength: 10
+            }
+        },
+        methods: {
+            isPass: function (bool,event) {
+                if(!bool) {
+                    event.preventDefault();
+                }
+            }
+        }
+
     });
 
 </script>

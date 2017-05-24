@@ -500,32 +500,142 @@
         </div>
 
         <filedset>
-            <legend>vue-validate</legend>
+            <legend>事件修饰符</legend>
             <div id="app24">
-                <validator name="validation1">
-                    <form novalidate>
-                        <div class="username-field">
-                            <label for="username">username:</label>
-                            <input id="username" type="text" v-validate:username="['required']">
-                        </div>
-                        <div class="comment-field">
-                            <label for="comment">comment:</label>
-                            <input id="comment" type="text" v-validate:comment="{ maxlength: 256 }">
-                        </div>
-                        <div class="errors">
-                            <p v-if="$validation1.username.required">Required your name.</p>
-                            <p v-if="$validation1.comment.maxlength">Your comment is too long.</p>
-                        </div>
-                        <input type="submit" value="send" v-if="$validation1.valid">
-                    </form>
-                </validator>
+                <div @click="saySelf('click from inner')" @click.self="saySelf('click from self')">
+                    <button class="btn btn-primary" @click="saySelf('button click')">button1</button>
+                    <button class="btn btn-primary" @click.stop="saySelf('just button click')">button2</button>
+                </div>
+            </div>
+        </filedset>
 
+        <filedset>
+            <legend>事件的触发机制</legend>
+            <div id="app25">
+                <input type="text" v-model="content" class="form-control">
+                <button @click="addTodo" class="btn btn-primary">添加</button>
+                <button @click="broadcast" class="btn btn-primary">广播</button>
+                <child-todo name="one"></child-todo>
+                <child-todo name="two"></child-todo>
+                <ul>
+                    <li v-for="value in todo">
+                        {{ value }}
+                    </li>
+                </ul>
+            </div>
+
+            <template id="eventTriggerTemplate">
+                <div>
+                    Child {{name}}
+                    <input type="text" v-model="content" class="form-control">
+                    <button class="btn btn-primary" @click="add">添加</button>
+                </div>
+            </template>
+        </filedset>
+
+        <fieldset>
+            <legend>slot进行内容分发</legend>
+            <div id="app26">
+                <my-slot>
+                    <p slot="title">{{title}}</p>
+                    <div slot="content">
+                        {{content}}
+                    </div>
+                </my-slot>
+
+                <template id="mySlot">
+                    <div>
+                        <div class="title">
+                            <slot name="title"></slot>
+                        </div>
+                        <div class="content">
+                            <slot name="content">
+
+                            </slot>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>内容分发综合应用</legend>
+            <div id="app27">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Launch demo modal
+                </button>
+
+                <my-modal>
+                    <h4 class="modal-title" slot="modal-header">{{title}}</h4>
+                    <div slot="modal-body">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                    </div>
+                </my-modal>
+
+                <!-- Modal -->
+                <template id="modalTemplate">
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <!--<h4 class="modal-title" id="myModalLabel">Modal title</h4>-->
+                                    <slot name="modal-header"></slot>
+                                </div>
+
+                                <div class="modal-body">
+                                    <slot name="modal-body"></slot>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </fieldset>
+
+        <filedset>
+            <legend>动态组件</legend>
+            <div id="app28">
+                <ul>
+                    <li @click="currentView = 'home'">Home</li>
+                    <li @click="currentView = 'list'">List</li>
+                    <li @click="currentView = 'detail'">Detail</li>
+                </ul>
+
+                <component :is="currentView"></component>
+            </div>
+        </filedset>
+
+        <filedset>
+            <legend>activate钩子函数</legend>
+            <div id="app29">
+                <ul>
+                    <li @click="currentView = 'home'">Home</li>
+                    <li @click="currentView = 'list'">List</li>
+                    <li @click="currentView = 'detail'">Detail</li>
+                </ul>
+
+                <component :is="currentView" ></component>
             </div>
         </filedset>
 
     </div>
+    <script src="js/jQuery1.9.1.js"></script>
     <script src="http://cdn.bootcss.com/vue/1.0.25-csp/vue.js"></script>
-    <script src="js/vue-validator.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
 
 

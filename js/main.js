@@ -481,14 +481,137 @@ var app23 = new Vue({
 
 var app24 = new Vue({
     el: "#app24",
-    data: {
+    methods: {
+        saySelf: function (msg) {
+            alert(msg);
+        }
+    }
+});
 
+Vue.component('child-todo',{
+    props: ['name'],
+    data: function () {
+        return {
+            content: ''
+        }
+    },
+    template: '#eventTriggerTemplate',
+    methods: {
+        add: function () {
+            this.$dispatch('add','Child' + this.name + ': ' + this.content);
+            this.content = '';
+        }
+    },
+    events: {
+        'to-child' : function (msg) {
+            this.$dispatch('add','Child' + this.name + ': ' + msg);
+        }
+    }
+
+});
+
+var app25 = new Vue({
+    el: '#app25',
+    data: {
+        todo: [],
+        content: ''
+    },
+    methods: {
+        addTodo: function () {
+            this.$emit('add','Parent: ' + this.content);
+            this.content = '';
+        },
+        broadcast: function () {
+            this.$broadcast('to-child',this.content);
+            this.content = '';
+        }
+    },
+    events: {
+        'add': function (msg) {
+            this.todo.push(msg);
+        }
     }
 });
 
 
+var app26 = new Vue({
+    el: '#app26',
+    data: {
+        title: 'this is a title',
+        content: 'this is a content'
+    },
+    components: {
+        'my-slot': {
+            template: '#mySlot'
+        }
+    }
+});
 
+var app27 = new Vue({
+    el: '#app27',
+    data: {
+        title: 'myModal'
+    },
+    components: {
+        'my-modal': {
+            template: '#modalTemplate'
+        }
+    }
+});
 
+var app28 = new Vue({
+    el: '#app28',
+    data: {
+        currentView: 'home'
+    },
+    components: {
+        home: {
+            template: '<div>Home</div>'
+        },
+        list: {
+            template: '<div>List</div>'
+        },
+        detail: {
+            template: '<div>Detail</div>'
+        }
+    }
+});
+
+var app29 = new Vue({
+    el: '#app29',
+    data: {
+        currentView: 'home'
+    },
+    components: {
+        home: {
+            template: '<div>' +
+                '<p>Home</p>'+
+                '<ul>' +
+                '<li v-for="item in items">{{item}}</li>' +
+            '</ul>' +
+            '</div>',
+            data: function () {
+                return {
+                    items: []
+                }
+            },
+            activate: function (done) {
+                var vm = this;
+
+                setTimeout(function () {
+                    vm.items = [1,2,3,4,5];
+                    done();
+                })
+            }
+        },
+        list: {
+            template: '<div>List</div>'
+        },
+        detail: {
+            template: '<div>Detail</div>'
+        }
+    }
+});
 
 
 
