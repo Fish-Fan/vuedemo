@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container">
+        <!--双向绑定-->
+        <fieldset>
+            <legend>双向绑定</legend>
+            <div id="app">
+                {{message}}
+                <input type="text" v-model="message">
+            </div>
+        </fieldset>
+
+        <!--v-for渲染列表-->
+        <field>
+            <legend>v-for渲染列表</legend>
+            <div id="app2">
+                <ul>
+                    <li v-for="todo in todos">{{$index}} - {{todo.text}}</li>
+                </ul>
+                <ul>
+                    <li v-for="value in object">{{$key}} - {{value}}</li>
+                </ul>
+            </div>
+        </field>
+
+        <!--按钮点击事件-->
+        <field>
+            <legend>按钮点击事件</legend>
+            <div id="app3">
+                <p>{{message}}</p>
+                <button @click="reverseMessageFn">点击</button>
+            </div>
+        </field>
+
+        <!--toDoList-->
+        <field>
+            <legend>todoList</legend>
+            <div id="app4">
+                <input type="text" v-model="todo" @keyup.enter="addToDoFn">
+                <ul>
+                    <li v-for="item in todoList">{{item}} <button @click="closeFn">X</button></li>
+                </ul>
+            </div>
+        </field>
+    </div>
+<!--<script src="js/bundle.js"></script>-->
+<script src="http://cdn.bootcss.com/vue/1.0.25-csp/vue.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

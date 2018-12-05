@@ -278,7 +278,7 @@ var childComp = Vue.extend({
 });
 
 var parentComp = Vue.extend({
-    template: '<div>I\' a parent div!!!<child-comp></child-comp></child-comp></div>',
+    template: '<div>I\' a parent div!!!<child-comp></child-comp></div>',
     components: {
         'child-comp': childComp
     }
@@ -287,8 +287,10 @@ var parentComp = Vue.extend({
 var app14 = new Vue({
     el: "#app14",
     data: {
-        name: 'Jack',
-        age: '29'
+        people: {
+            name: 'Jack',
+            age: '29'
+        }
     },
     components: {
         'parent-comp': parentComp,
@@ -300,8 +302,21 @@ var app14 = new Vue({
         },
         'my-component3': {
             template: '#myComponent3',
-            props: ['myName','myAge']
+            props: {
+                people: Object
+            },
+            // created() {
+            //   this.childName = '小明';
+            //   this.childAge = 10
+            // },
+            data: function () {
+                return {
+                    childName: this.people.name,
+                    childAge: this.people.age
+                }
+            }
         }
+
     }
 
 });
